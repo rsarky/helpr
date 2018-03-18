@@ -1,4 +1,5 @@
 module.exports = (robot) => {
+  // TODO: Comment on issue along with adding label on pull_request events.
   // TODO: pull_request.reopened?
   robot.on('pull_request.opened', pullHandler)
   robot.on('pull_request.edited', pullHandler)
@@ -10,7 +11,7 @@ module.exports = (robot) => {
     const state = payload.pull_request.state
     const body = payload.pull_request.body
     context.log(state)
-    // Create the labels.
+    // Create the labels. TODO : Add a config file for labels and label colors.
     try {
       await github.issues.createLabel(context.repo({name: 'pr-available', color: '1381ef'}))
       await github.issues.createLabel(context.repo({name: 'pr-merged', color: '1381ef'}))

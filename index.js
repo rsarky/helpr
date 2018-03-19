@@ -53,7 +53,7 @@ module.exports = (robot) => {
   }
 
   function parse (body) {
-    const re = /(^|\b)#\d+\b/ // TODO : Fix RegExp. Doesnt work for "fixes #1"
+    const re = /\B#\d+\b/ // TODO : Fix RegExp. Doesnt work for "fixes #1"
     const found = body.match(re)
     if (found) {
       return parseInt(found[0].slice(1), 10)

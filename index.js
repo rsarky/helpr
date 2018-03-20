@@ -1,16 +1,15 @@
 module.exports = (robot) => {
   // TODO: Comment on issue along with adding label on pull_request events.
   // TODO: pull_request.reopened?
-  robot.on('pull_request.opened', pullHandler)
-  robot.on('pull_request.edited', pullHandler)
-  robot.on('pull_request.closed', pullHandler)
+  robot.on(['pull_request.opened',
+            'pull_request.edited',
+            'pull_request.closed'], pullHandler)
 
   async function pullHandler (context) {
     const { github, payload } = context
     const merged = payload.pull_request.merged
     const state = payload.pull_request.state
     const body = payload.pull_request.body
-    context.log(state)
     // Create the labels. TODO : Add a config file for labels and label colors.
     try {
       await github.issues.createLabel(context.repo({name: 'pr-available', color: '1381ef'}))
@@ -19,7 +18,6 @@ module.exports = (robot) => {
     } catch (e) {}
 
     const issueNum = parse(body)
-    context.log(issueNum)
     if (issueNum) {
       context.log(`Issue ${issueNum} has been referenced.`)
 
@@ -53,7 +51,7 @@ module.exports = (robot) => {
   }
 
   function parse (body) {
-    const re = /\B#\d+\b/ // TODO : Fix RegExp. Doesnt work for "fixes #1"
+    const re = /\B#\d+\b/
     const found = body.match(re)
     if (found) {
       return parseInt(found[0].slice(1), 10)

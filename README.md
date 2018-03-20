@@ -1,6 +1,6 @@
 # helpr
 
-> a GitHub App built with [probot](https://github.com/probot/probot) that 
+> a GitHub App built with [probot](https://github.com/probot/probot) that assigns labels to issues based on the status of the PR associated with it.
 
 ## Setup
 

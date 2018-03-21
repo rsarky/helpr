@@ -12,9 +12,11 @@ module.exports = (robot) => {
     const body = payload.pull_request.body
     // Create the labels. TODO : Add a config file for labels and label colors.
     try {
-      await github.issues.createLabel(context.repo({name: 'pr-available', color: '1381ef'}))
-      await github.issues.createLabel(context.repo({name: 'pr-merged', color: '1381ef'}))
-      await github.issues.createLabel(context.repo({name: 'pr-rejected', color: '1381ef'}))
+      await Promise.all([
+        github.issues.createLabel(context.repo({name: 'pr-available', color: '1381ef'})),
+        github.issues.createLabel(context.repo({name: 'pr-merged', color: '1381ef'})),
+        github.issues.createLabel(context.repo({name: 'pr-rejected', color: '1381ef'}))
+      ])
     } catch (e) {}
 
     const issueNum = parse(body)

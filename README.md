@@ -23,12 +23,6 @@ Now when someone references this issue in a pull request helpr will automaticall
 
 When a PR for an issue is merged or rejected **helpr** will remove the `pr-available` label and add the respective merged or rejected label.
 
-## TODO
-
-- [ ] Add a config file for the name and color of the labels.
-- [ ] Add tests
-- [ ] Handle case where multiple PR's are referenced in an issue.
-- [ ] Add a cool icon for helpr.
 
 ## Setup
 

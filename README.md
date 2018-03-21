@@ -4,7 +4,7 @@
 
 ## Usage
 
-Using helpr is pretty straightforward. Just install the app on your repository and you are ready to go. :100: 
+Using helpr is pretty straightforward. Just [install](https://github.com/apps/helpr) the app on your repository and you are ready to go. :100: 
 
 
 Consider this open issue :
@@ -28,6 +28,7 @@ When a PR for an issue is merged or rejected **helpr** will remove the `pr-avail
 - [ ] Add a config file for the name and color of the labels.
 - [ ] Add tests
 - [ ] Handle case where multiple PR's are referenced in an issue.
+- [ ] Add a cool icon for helpr.
 
 ## Setup
 

@@ -7,9 +7,7 @@ module.exports = (robot) => {
 
   async function pullHandler (context) {
     const { github, payload } = context
-    const merged = payload.pull_request.merged
-    const state = payload.pull_request.state
-    const body = payload.pull_request.body
+    const { merged, state, body } = payload.pull_request
     // Create the labels. TODO : Add a config file for labels and label colors.
     try {
       await Promise.all([

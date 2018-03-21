@@ -11,11 +11,13 @@ module.exports = (robot) => {
     // Create the labels. TODO : Add a config file for labels and label colors.
     try {
       await Promise.all([
-        github.issues.createLabel(context.repo({name: 'pr-available', color: '1381ef'})),
-        github.issues.createLabel(context.repo({name: 'pr-merged', color: '1381ef'})),
-        github.issues.createLabel(context.repo({name: 'pr-rejected', color: '1381ef'}))
+        github.issues.createLabel(context.repo({name: 'pr-available', color: '4CAF50'})),
+        github.issues.createLabel(context.repo({name: 'pr-merged', color: '673AB7'})),
+        github.issues.createLabel(context.repo({name: 'pr-rejected', color: 'F44336'}))
       ])
-    } catch (e) {}
+    } catch (e) {
+    robot.log.error(e, "Error occured while creating a label: " + e)
+    }
 
     const issueNum = parse(body)
     if (issueNum) {
@@ -26,20 +28,26 @@ module.exports = (robot) => {
         // Remove pr-rejected label if it exists.
         try {
           await github.issues.removeLabel(context.repo({number: issueNum, name: 'pr-rejected'}))
-        } catch (e) {}
+        } catch (e) {
+          robot.log.error(e, "Error occured while removing pr-rejected label: " + e);
+        }
         await github.issues.addLabels(context.repo({number: issueNum, labels: ['pr-available']}))
       }
       else if (state === 'closed') {
         // Remove pr-open label if it exists.
         try {
           await github.issues.removeLabel(context.repo({number: issueNum, name: 'pr-available'}))
-        } catch (e) {}
+        } catch (e) {
+          robot.log.error(e, "Error occured while removing pr-open label: " + e);
+        }
 
         if (merged) {
           // Remove pr-rejected label if it exists.
           try {
             await github.issues.removeLabel(context.repo({number: issueNum, name: 'pr-rejected'}))
-          } catch (e) {}
+          } catch (e) {
+            robot.error.log(e, "Error occured while removing pr-rejected label: " + e);
+          }
 
           await github.issues.addLabels(context.repo({number: issueNum, labels: ['pr-merged']}))
         }

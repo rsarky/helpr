@@ -10,6 +10,7 @@
     "test": "jest && standard"
   },
   "dependencies": {
+    "issue-parser": "^1.0.3",
     "probot": "^6.0.0"
   },
   "devDependencies": {

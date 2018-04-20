@@ -25,5 +25,13 @@
     "env": [
       "jest"
     ]
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/tests/fixtures/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

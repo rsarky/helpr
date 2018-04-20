@@ -1,6 +1,8 @@
-# helpr
+<div align="center">
+<h2>helPR</h2>
+</div>
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that assigns labels to issues based on the status of the PR associated with it.
+A GitHub App built with [Probot](https://github.com/probot/probot) that assigns labels to issues based on the status of the PR associated with it.
 
 ## Usage
 
@@ -8,12 +10,14 @@ Using helpr is pretty straightforward. Just [install](https://github.com/apps/he
 
 
 Consider this open issue :
-![issue](./screenshots/usage-img2.jpg)
 
+![issue](./screenshots/usage-img2.jpg)
+<br><br>
 
 Now when someone references this issue in a pull request helpr will automatically add the label `pr-available` :
-![labelled](./screenshots/usage-img1.jpg)
 
+![labelled](./screenshots/usage-img1.jpg)
+<br><br>
 
 
 **helpr** supports 3 labels :

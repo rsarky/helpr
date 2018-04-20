@@ -1,6 +1,6 @@
 <p align="center">
 <h2 align="center">helPR</h2>
-<p align="center">A GitHub App built with [Probot](https://github.com/probot/probot) that assigns labels to issues based on the status of the PR associated with it.</p>
+<p align="center">A GitHub App built with <a href="https://github.com/probot/probot">Probot</a> that assigns labels to issues based on the status of the PR associated with it.</p>
 <p align="center"><a href="https://travis-ci.org/rsarky/helpr"><img src="https://travis-ci.org/rsarky/helpr.svg?branch=master" alt="Build Status"></a><a href="https://codecov.io/gh/rsarky/helpr">
   <img src="https://codecov.io/gh/rsarky/helpr/branch/master/graph/badge.svg" />
 </a></p>

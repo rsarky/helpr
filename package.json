@@ -7,7 +7,7 @@
   "repository": "https://github.com/rsarky/helpr.git",
   "scripts": {
     "start": "probot run ./src/index.js",
-    "test": "jest && standard"
+    "test": "jest --coverage && standard"
   },
   "dependencies": {
     "issue-parser": "^1.0.3",

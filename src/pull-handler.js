@@ -21,32 +21,7 @@ module.exports = async (context) => {
 
     if (state === 'open') {
       // Remove pr-rejected label if it exists.
-      try {
-        let promises = []
-        issueNum.forEach(ele => {
-          promises.push(github.issues.removeLabel(context.repo({ number: ele, name: config.rejected })))
-        })
-        await Promise.all(promises)
-      } catch (e) { }
-
-      // Add label to the issues.
-      let promises = []
-      issueNum.forEach(ele => {
-        promises.push(github.issues.addLabels(context.repo({ number: ele, labels: [config.opened] })))
-      })
-      await Promise.all(promises)
-    } else if (state === 'closed') {
-      // Remove pr-open label if it exists.
-      try {
-        let promises = []
-        issueNum.forEach(ele => {
-          promises.push(github.issues.removeLabel(context.repo({ number: ele, name: config.opened })))
-        })
-        await Promise.all(promises)
-      } catch (e) { }
-
-      if (merged) {
-        // Remove pr-rejected label if it exists.
+      if (config.rejected) {
         try {
           let promises = []
           issueNum.forEach(ele => {
@@ -54,18 +29,53 @@ module.exports = async (context) => {
           })
           await Promise.all(promises)
         } catch (e) { }
-        // Add pr-merged label to issues
+      }
+      // Add label to the issues.
+      if (config.opened) {
         let promises = []
         issueNum.forEach(ele => {
-          promises.push(github.issues.addLabels(context.repo({ number: ele, labels: [config.merged] })))
+          promises.push(github.issues.addLabels(context.repo({ number: ele, labels: [config.opened] })))
         })
+        await Promise.all(promises)
+      }
+    } else if (state === 'closed') {
+      // Remove pr-open label if it exists.
+      if (config.opened) {
+        try {
+          let promises = []
+          issueNum.forEach(ele => {
+            promises.push(github.issues.removeLabel(context.repo({ number: ele, name: config.opened })))
+          })
+          await Promise.all(promises)
+        } catch (e) { }
+      }
+      if (merged) {
+        // Remove pr-rejected label if it exists.
+        if (config.rejected) {
+          try {
+            let promises = []
+            issueNum.forEach(ele => {
+              promises.push(github.issues.removeLabel(context.repo({ number: ele, name: config.rejected })))
+            })
+            await Promise.all(promises)
+          } catch (e) { }
+        }
+        // Add pr-merged label to issues
+        if (config.merged) {
+          let promises = []
+          issueNum.forEach(ele => {
+            promises.push(github.issues.addLabels(context.repo({ number: ele, labels: [config.merged] })))
+          })
+        }
         await Promise.all(promises)
       } else {
-        let promises = []
-        issueNum.forEach(ele => {
-          promises.push(github.issues.addLabels(context.repo({ number: ele, labels: [config.rejected] })))
-        })
-        await Promise.all(promises)
+        if (config.rejected) {
+          let promises = []
+          issueNum.forEach(ele => {
+            promises.push(github.issues.addLabels(context.repo({ number: ele, labels: [config.rejected] })))
+          })
+          await Promise.all(promises)
+        }
       }
     }
   }
